@@ -111,7 +111,6 @@
   const errEl = document.getElementById('petition-error');
   const success = document.getElementById('petition-success');
   const successName = document.getElementById('success-first-name');
-  const openShare = document.getElementById('open-share');
 
   const showError = (msg) => {
     errEl.textContent = msg;
@@ -141,7 +140,6 @@
       form.hidden = true;
       success.hidden = false;
       bumpCounter();
-      openModal();
     }, 650);
   });
 
@@ -225,57 +223,4 @@
   });
 
   updateDonateUI();
-
-  // ── Share modal ────────────────────────────────────────────────
-  const shareModal = document.getElementById('share-modal');
-  const shareClose = document.getElementById('share-close');
-  const shareCopy = document.getElementById('share-copy');
-  const shareButtons = document.querySelectorAll('.share-btn');
-
-  const SHARE_URL = 'https://betazuck.com';
-  const SHARE_TEXT = 'Meta silenced 1.3 million voices with no warning. Sign the petition. Fight back. →';
-
-  function openModal() { shareModal.hidden = false; }
-  function closeModal() { shareModal.hidden = true; }
-
-  openShare.addEventListener('click', openModal);
-  shareClose.addEventListener('click', closeModal);
-  shareModal.addEventListener('click', (e) => {
-    if (e.target === shareModal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !shareModal.hidden) closeModal();
-  });
-
-  function copyShareLink() {
-    const text = `${SHARE_TEXT} ${SHARE_URL}`;
-    const done = () => {
-      shareCopy.classList.add('is-copied');
-      shareCopy.textContent = '✓ LINK COPIED';
-      setTimeout(() => {
-        shareCopy.classList.remove('is-copied');
-        shareCopy.textContent = 'COPY LINK';
-      }, 1600);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
-    } else {
-      fallbackCopy(text, done);
-    }
-  }
-
-  function fallbackCopy(text, done) {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    try { document.execCommand('copy'); } catch (e) {}
-    document.body.removeChild(ta);
-    done();
-  }
-
-  shareCopy.addEventListener('click', copyShareLink);
-  shareButtons.forEach((btn) => btn.addEventListener('click', copyShareLink));
 })();
