@@ -30,9 +30,10 @@ export default async function handler(req) {
   }
   const unitAmount = Math.round(amountUsd * 100);
 
-  // Accept either env var name. STRIPE_SECRET_KEY is the convention;
-  // STRIPE_TEST_KEY is supported for quick test-mode swaps.
-  const secret = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_TEST_KEY;
+  // STRIPE_TEST_KEY takes precedence so test mode is sticky during
+  // testing even if STRIPE_SECRET_KEY (live) is also set. Unset the
+  // test key to flip back to live.
+  const secret = process.env.STRIPE_TEST_KEY || process.env.STRIPE_SECRET_KEY;
   if (!secret) return serverError('Stripe is not configured (STRIPE_SECRET_KEY)');
   const origin = (getOptionalEnv('PUBLIC_SITE_URL') || new URL(req.url).origin).replace(/\/$/, '');
 
