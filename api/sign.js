@@ -10,7 +10,7 @@
 //                       must be whitelisted on the Nucleus form
 //                       (e.g. https://betazuck.com)
 
-import { json, badRequest, methodNotAllowed, serverError, getEnv, getOptionalEnv } from './_lib.js';
+import { json, badRequest, methodNotAllowed, serverError, getEnv, getOptionalEnv, clientIp, sha256Hex } from './_lib.js';
 
 export const config = { runtime: 'edge' };
 
@@ -79,6 +79,7 @@ export default async function handler(req) {
 
   // Treat 2xx and 3xx (redirect to thank-you) as success.
   if (nucleusRes.status >= 200 && nucleusRes.status < 400) {
+    await mirrorToSupabase({ req, firstName, lastName, email, phone, zip });
     return json({ ok: true });
   }
 
@@ -96,4 +97,41 @@ export default async function handler(req) {
     );
   }
   return json({ ok: false, error: 'Nucleus rejected the submission', status: nucleusRes.status }, { status: 502 });
+}
+
+// Best-effort mirror of an accepted signature into Supabase so the public
+// counter (api/count.js → signatures_count() RPC) reflects reality. Nucleus
+// is the source of truth for the signer list; Supabase is just a counter.
+// Failures are swallowed — the user already got a successful response.
+async function mirrorToSupabase({ req, firstName, lastName, email, phone, zip }) {
+  const url = process.env.SUPABASE_URL;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !serviceKey) return;
+
+  try {
+    const ip = clientIp(req);
+    const ipHash = ip ? await sha256Hex(ip) : null;
+    const userAgent = (req.headers.get('user-agent') || '').slice(0, 500) || null;
+
+    await fetch(`${url}/rest/v1/signatures`, {
+      method: 'POST',
+      headers: {
+        apikey: serviceKey,
+        authorization: `Bearer ${serviceKey}`,
+        'content-type': 'application/json',
+        prefer: 'return=minimal',
+      },
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName || null,
+        email,
+        phone: phone || null,
+        zip: zip || null,
+        ip_hash: ipHash,
+        user_agent: userAgent,
+      }),
+    });
+  } catch (err) {
+    console.error('supabase mirror failed:', err);
+  }
 }

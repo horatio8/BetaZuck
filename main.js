@@ -1,10 +1,9 @@
 (function () {
   'use strict';
 
-  const BASE_SIGNATURES = 47293;
-  const COUNTER_KEY = 'bz_sig_count';
   const DEADLINE_KEY = 'bz_deadline_ms';
   const DEADLINE_HOURS = 72;
+  const COUNT_POLL_MS = 30_000;
 
   const formatNum = (n) => Number(n).toLocaleString('en-US');
   const pad2 = (n) => String(n).padStart(2, '0');
@@ -16,19 +15,8 @@
   const petitionCounterNum = document.getElementById('petition-counter-num');
   const stickyStatus = document.getElementById('sticky-cta-status');
 
-  function readCounter() {
-    try {
-      const saved = Number(localStorage.getItem(COUNTER_KEY));
-      if (saved && saved >= BASE_SIGNATURES) return saved;
-    } catch (e) {}
-    return BASE_SIGNATURES;
-  }
-
-  function writeCounter(n) {
-    try { localStorage.setItem(COUNTER_KEY, String(n)); } catch (e) {}
-  }
-
-  let count = readCounter();
+  let count = 0;
+  let counterRevealed = false;
 
   function renderCounter() {
     const text = formatNum(count);
@@ -37,19 +25,29 @@
     if (stickyStatus) stickyStatus.textContent = text + ' signed';
   }
 
-  heroCounter.hidden = false;
-  petitionCounter.hidden = false;
-  renderCounter();
+  async function fetchCount() {
+    try {
+      const res = await fetch('/api/count', { cache: 'no-store' });
+      if (!res.ok) return;
+      const out = await res.json();
+      const n = Number(out.count);
+      if (!Number.isFinite(n)) return;
+      // Don't regress past an optimistic local bump that hasn't propagated yet.
+      if (n > count) count = n;
+      renderCounter();
+      if (!counterRevealed) {
+        heroCounter.hidden = false;
+        petitionCounter.hidden = false;
+        counterRevealed = true;
+      }
+    } catch (e) {}
+  }
 
-  setInterval(() => {
-    count += (Math.random() < 0.55 ? 1 : 0) + (Math.random() < 0.25 ? 1 : 0);
-    writeCounter(count);
-    renderCounter();
-  }, 1800);
+  fetchCount();
+  setInterval(fetchCount, COUNT_POLL_MS);
 
   function bumpCounter() {
     count += 1;
-    writeCounter(count);
     renderCounter();
   }
 
