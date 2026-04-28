@@ -431,18 +431,36 @@ a { color: inherit; }
 }
 .field-label-opt { opacity: 0.5; font-weight: 500; text-transform: none; letter-spacing: 0; }
 .petition-form input[type="text"],
-.petition-form input[type="email"] {
+.petition-form input[type="email"],
+.petition-form input[type="tel"],
+.petition-form select {
   width: 100%;
   padding: 16px;
   font-size: 17px;
   font-family: inherit;
   border: 1.5px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.04);
+  background-color: rgba(255, 255, 255, 0.04);
   color: var(--fg);
   border-radius: 2px;
   outline: none;
 }
-.petition-form input:focus { border-color: var(--red); }
+.petition-form input:focus,
+.petition-form select:focus { border-color: var(--red); }
+
+.petition-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='rgba(248,248,248,0.6)' d='M0 0l6 8 6-8z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 10px 8px;
+}
+.petition-form select option { background: #111; color: var(--fg); }
+
+.phone-group { display: flex; gap: 8px; }
+.phone-group .country-select { flex: 0 0 auto; width: auto; }
+.phone-group input[type="tel"] { flex: 1 1 auto; min-width: 0; }
 
 .checkbox {
   display: flex;

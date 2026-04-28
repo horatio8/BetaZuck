@@ -124,11 +124,13 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(form);
-    const first   = String(data.get('first') || '').trim();
-    const email   = String(data.get('email') || '').trim();
-    const phone   = String(data.get('phone') || '').trim();
-    const zip     = String(data.get('zip') || '').trim();
-    const updates = data.get('updates') === 'on' || form.querySelector('[name="updates"]').checked;
+    const first       = String(data.get('first') || '').trim();
+    const last        = String(data.get('last') || '').trim();
+    const email       = String(data.get('email') || '').trim();
+    const zip         = String(data.get('zip') || '').trim();
+    const phoneRaw    = String(data.get('phone') || '').trim();
+    const countryCode = String(data.get('country_code') || '+1').trim();
+    const phone       = phoneRaw ? `${countryCode} ${phoneRaw}` : '';
 
     if (!first) { showError('Enter your first name.'); return; }
     if (!/^\S+@\S+\.\S+$/.test(email)) { showError('Enter a valid email.'); return; }
@@ -145,10 +147,10 @@
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           first_name: first,
+          last_name: last,
           email,
           phone,
           zip,
-          updates_opt_in: updates,
         }),
       });
       const out = await res.json().catch(() => ({}));

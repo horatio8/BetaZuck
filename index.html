@@ -132,6 +132,10 @@
               <input name="first" type="text" placeholder="Jane" autocomplete="given-name" />
             </label>
             <label class="field">
+              <span class="field-label">Last Name <span class="field-label-opt">(optional)</span></span>
+              <input name="last" type="text" placeholder="Doe" autocomplete="family-name" />
+            </label>
+            <label class="field">
               <span class="field-label">Email *</span>
               <input name="email" type="email" placeholder="jane@email.com" autocomplete="email" />
             </label>
@@ -141,11 +145,53 @@
             </label>
             <label class="field">
               <span class="field-label">Phone <span class="field-label-opt">(optional)</span></span>
-              <input name="phone" type="tel" placeholder="(555) 123-4567" inputmode="tel" autocomplete="tel" maxlength="20" />
-            </label>
-            <label class="checkbox">
-              <input type="checkbox" name="updates" checked />
-              <span>Keep me updated on the fight. <span class="muted">(We will never sell your info.)</span></span>
+              <div class="phone-group">
+                <select name="country_code" class="country-select" aria-label="Country code">
+                  <option value="+1" selected>&#127482;&#127480; +1</option>
+                  <option value="+54">&#127462;&#127479; +54</option>
+                  <option value="+61">&#127462;&#127482; +61</option>
+                  <option value="+43">&#127462;&#127481; +43</option>
+                  <option value="+32">&#127463;&#127466; +32</option>
+                  <option value="+55">&#127463;&#127479; +55</option>
+                  <option value="+1">&#127464;&#127462; +1 (CA)</option>
+                  <option value="+56">&#127464;&#127473; +56</option>
+                  <option value="+86">&#127464;&#127475; +86</option>
+                  <option value="+57">&#127464;&#127476; +57</option>
+                  <option value="+420">&#127464;&#127487; +420</option>
+                  <option value="+45">&#127465;&#127472; +45</option>
+                  <option value="+358">&#127467;&#127470; +358</option>
+                  <option value="+33">&#127467;&#127479; +33</option>
+                  <option value="+49">&#127465;&#127466; +49</option>
+                  <option value="+30">&#127468;&#127479; +30</option>
+                  <option value="+852">&#127469;&#127472; +852</option>
+                  <option value="+91">&#127470;&#127475; +91</option>
+                  <option value="+62">&#127470;&#127465; +62</option>
+                  <option value="+353">&#127470;&#127466; +353</option>
+                  <option value="+972">&#127470;&#127473; +972</option>
+                  <option value="+39">&#127470;&#127481; +39</option>
+                  <option value="+81">&#127471;&#127477; +81</option>
+                  <option value="+82">&#127472;&#127479; +82</option>
+                  <option value="+52">&#127474;&#127485; +52</option>
+                  <option value="+31">&#127475;&#127473; +31</option>
+                  <option value="+64">&#127475;&#127487; +64</option>
+                  <option value="+47">&#127475;&#127476; +47</option>
+                  <option value="+63">&#127477;&#127469; +63</option>
+                  <option value="+48">&#127477;&#127473; +48</option>
+                  <option value="+351">&#127477;&#127481; +351</option>
+                  <option value="+65">&#127480;&#127468; +65</option>
+                  <option value="+27">&#127487;&#127462; +27</option>
+                  <option value="+34">&#127466;&#127480; +34</option>
+                  <option value="+46">&#127480;&#127466; +46</option>
+                  <option value="+41">&#127464;&#127469; +41</option>
+                  <option value="+886">&#127481;&#127484; +886</option>
+                  <option value="+66">&#127481;&#127469; +66</option>
+                  <option value="+90">&#127481;&#127479; +90</option>
+                  <option value="+971">&#127462;&#127466; +971</option>
+                  <option value="+44">&#127468;&#127463; +44</option>
+                  <option value="+84">&#127483;&#127475; +84</option>
+                </select>
+                <input name="phone" type="tel" placeholder="(555) 123-4567" inputmode="tel" autocomplete="tel" maxlength="20" />
+              </div>
             </label>
             <div id="petition-error" class="form-error" hidden></div>
             <button type="submit" class="btn btn-submit">SIGN THE PETITION &rarr;</button>
