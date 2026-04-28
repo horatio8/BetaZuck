@@ -159,6 +159,10 @@
       form.hidden = true;
       success.hidden = false;
       bumpCounter();
+      setTimeout(() => {
+        const donate = document.getElementById('donate');
+        if (donate) donate.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 2000);
     } catch (err) {
       showError(err.message || 'Something went wrong. Please try again.');
       submitBtn.disabled = false;
