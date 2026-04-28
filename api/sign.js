@@ -1,29 +1,29 @@
-// POST /api/sign — proxies a petition signature to the Campaign Nucleus
-// form receiver. Done server-side because the receiver does Origin-based
-// access control (browser-direct POSTs return 403 host_not_allowed unless
-// the page domain is whitelisted in Nucleus).
+// POST /api/sign — records a petition signature.
 //
-// Required env vars (set in Vercel → Settings → Environment Variables):
-//   NUCLEUS_FORM_URL  — full receiver URL from Nucleus
-//                       (e.g. https://teller.campaignnucleus.com/forms/receiver/<uuid>)
-//   PUBLIC_SITE_URL   — public origin to send as the Origin/Referer header,
-//                       must be whitelisted on the Nucleus form
-//                       (e.g. https://betazuck.com)
+// Sync to Campaign Nucleus:
+//   - If NUCLEUS_API_TOKEN is set, calls POST /v1/profiles/match (auth'd CRM
+//     upsert with proper identity matching, tags, custom fields).
+//   - Else falls back to the public form receiver (NUCLEUS_FORM_URL).
+//   See api/_nucleus.js for the dispatch logic.
+//
+// Then mirrors the row to Supabase (best-effort) so the public live
+// counter at /api/count reflects reality.
+//
+// Required env vars:
+//   PUBLIC_SITE_URL   — public origin (used as Origin/Referer for the
+//                       form receiver fallback; whitelisted on Nucleus)
+//
+// One of these must be set:
+//   NUCLEUS_API_TOKEN — Bearer for api.campaignnucleus.com (preferred), or
+//   NUCLEUS_FORM_URL  — public form receiver URL
 
-import { json, badRequest, methodNotAllowed, serverError, getEnv, getOptionalEnv, clientIp, sha256Hex } from './_lib.js';
+import {
+  json, badRequest, methodNotAllowed, getOptionalEnv,
+  clientIp, sha256Hex,
+} from './_lib.js';
+import { syncProfileToNucleus } from './_nucleus.js';
 
 export const config = { runtime: 'edge' };
-
-// Field mapping. Adjust the right-hand strings if Nucleus expects different names.
-const NUCLEUS_FIELDS = {
-  first_name:    'first_name',
-  last_name:     'last_name',
-  email:         'email',
-  phone:         'phone',
-  zip:           'zip',
-  opt_in:        'opt_in',
-  source:        'source',
-};
 
 export default async function handler(req) {
   if (req.method !== 'POST') return methodNotAllowed('POST');
@@ -36,72 +36,56 @@ export default async function handler(req) {
   }
 
   const firstName = String(payload.first_name || payload.first || '').trim();
+  const lastName  = String(payload.last_name || '').trim();
   const email     = String(payload.email || '').trim();
   const phone     = String(payload.phone || '').trim();
   const zip       = String(payload.zip || '').trim();
-  const lastName  = String(payload.last_name || '').trim();
-  const optIn     = payload.updates_opt_in !== false; // default true
 
   if (!firstName) return badRequest('First name is required');
   if (!/^\S+@\S+\.\S+$/.test(email)) return badRequest('Valid email is required');
 
-  const nucleusUrl = getEnv('NUCLEUS_FORM_URL');
-  const origin     = getOptionalEnv('PUBLIC_SITE_URL') || new URL(req.url).origin;
+  const origin = getOptionalEnv('PUBLIC_SITE_URL') || new URL(req.url).origin;
 
-  // URL-encoded form body (most form receivers accept this).
-  const body = new URLSearchParams();
-  body.set(NUCLEUS_FIELDS.first_name, firstName);
-  body.set(NUCLEUS_FIELDS.email, email);
-  if (lastName) body.set(NUCLEUS_FIELDS.last_name, lastName);
-  if (phone)    body.set(NUCLEUS_FIELDS.phone, phone);
-  if (zip)      body.set(NUCLEUS_FIELDS.zip, zip);
-  body.set(NUCLEUS_FIELDS.opt_in, optIn ? '1' : '0');
-  body.set(NUCLEUS_FIELDS.source, 'betazuck-landing');
-
-  let nucleusRes;
+  // Sync to Nucleus. Throws if both API and form receiver paths fail.
   try {
-    nucleusRes = await fetch(nucleusUrl, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'accept': 'application/json, text/plain, */*',
-        'origin': origin,
-        'referer': origin + '/',
-        'user-agent': 'βetaZuck-landing/1.0 (+' + origin + ')',
-      },
-      body: body.toString(),
-      redirect: 'manual', // many form receivers respond with 302 → thank-you page
-    });
-  } catch (err) {
-    console.error('nucleus fetch failed:', err);
-    return serverError('Could not reach Nucleus');
-  }
-
-  // Treat 2xx and 3xx (redirect to thank-you) as success.
-  if (nucleusRes.status >= 200 && nucleusRes.status < 400) {
-    await mirrorToSupabase({ req, firstName, lastName, email, phone, zip });
-    return json({ ok: true });
-  }
-
-  // Surface an actionable error for debugging.
-  const text = await nucleusRes.text().catch(() => '');
-  console.error('nucleus rejected:', nucleusRes.status, text.slice(0, 500));
-
-  if (nucleusRes.status === 403) {
-    return json(
+    await syncProfileToNucleus(
       {
-        ok: false,
-        error: 'Nucleus rejected the submission origin. The site domain must be whitelisted on the Nucleus form.',
+        first_name: firstName,
+        last_name: lastName || undefined,
+        email,
+        phone: phone || undefined,
+        zip: zip || undefined,
+        tags: ['betazuck-signer'],
+        metadata: { source: 'betazuck-landing' },
       },
-      { status: 502 }
+      {
+        url: getOptionalEnv('NUCLEUS_FORM_URL') || undefined,
+        source: 'betazuck-landing',
+        originUrl: origin,
+      },
     );
+  } catch (err) {
+    console.error('nucleus sync failed:', err.message);
+    if (err.message.includes('403') || err.message.toLowerCase().includes('origin')) {
+      return json(
+        {
+          ok: false,
+          error: 'Nucleus rejected the submission origin. The site domain must be whitelisted on the Nucleus form.',
+        },
+        { status: 502 },
+      );
+    }
+    return json({ ok: false, error: 'Could not reach Nucleus' }, { status: 502 });
   }
-  return json({ ok: false, error: 'Nucleus rejected the submission', status: nucleusRes.status }, { status: 502 });
+
+  // Best-effort mirror to Supabase for the public counter.
+  await mirrorToSupabase({ req, firstName, lastName, email, phone, zip });
+
+  return json({ ok: true });
 }
 
 // Best-effort mirror of an accepted signature into Supabase so the public
-// counter (api/count.js → signatures_count() RPC) reflects reality. Nucleus
-// is the source of truth for the signer list; Supabase is just a counter.
+// counter (api/count.js → signatures_count() RPC) reflects reality.
 // Failures are swallowed — the user already got a successful response.
 async function mirrorToSupabase({ req, firstName, lastName, email, phone, zip }) {
   const url = process.env.SUPABASE_URL;

@@ -8,14 +8,16 @@
 //
 // On a successful checkout this:
 //   1. Records the donation in Supabase (idempotent on session id).
-//   2. Posts the donor to Campaign Nucleus so they enter the email
-//      list / CRM the same way petition signers do. Uses
-//      NUCLEUS_DONOR_FORM_URL if set, falls back to NUCLEUS_FORM_URL.
+//   2. Posts the donor to Campaign Nucleus via api/_nucleus.js, which
+//      prefers POST /v1/profiles/match (auth'd CRM upsert with tags +
+//      donation amount in custom1) when NUCLEUS_API_TOKEN is set, and
+//      falls back to NUCLEUS_DONOR_FORM_URL or NUCLEUS_FORM_URL.
 //
 // Both side effects are best-effort — failures are logged but the webhook
 // still returns 200 so Stripe doesn't retry on transient issues.
 
 import { json, methodNotAllowed, getEnv, getOptionalEnv } from './_lib.js';
+import { syncProfileToNucleus } from './_nucleus.js';
 
 export const config = { runtime: 'edge' };
 
@@ -126,10 +128,6 @@ async function recordDonation(session) {
 }
 
 async function sendDonorToNucleus(session, req) {
-  const nucleusUrl =
-    getOptionalEnv('NUCLEUS_DONOR_FORM_URL') || getOptionalEnv('NUCLEUS_FORM_URL');
-  if (!nucleusUrl) return;
-
   const cd = session.customer_details || {};
   const email = cd.email || session.customer_email || '';
   if (!email) return;
@@ -143,39 +141,47 @@ async function sendDonorToNucleus(session, req) {
     getOptionalEnv('PUBLIC_SITE_URL') || new URL(req.url).origin.replace(/\/$/, '');
   const isMonthly =
     session.mode === 'subscription' || session.metadata?.monthly === '1';
+  const amountUsd =
+    typeof session.amount_total === 'number' ? session.amount_total / 100 : null;
 
-  const body = new URLSearchParams();
-  body.set('first_name', firstName);
-  if (lastName) body.set('last_name', lastName);
-  body.set('email', email);
-  if (cd.phone) body.set('phone', cd.phone);
-  if (cd.address?.postal_code) body.set('zip', cd.address.postal_code);
-  body.set('opt_in', '1');
-  body.set('source', isMonthly ? 'betazuck-monthly-donor' : 'betazuck-donor');
-  if (typeof session.amount_total === 'number') {
-    body.set('amount_usd', String(session.amount_total / 100));
-  }
+  const tags = ['betazuck-donor'];
+  if (isMonthly) tags.push('betazuck-monthly-donor');
+
+  // custom1: most recent donation amount (USD), readable in Nucleus profile.
+  // custom2: most recent donation date (ISO yyyy-mm-dd).
+  const profile = {
+    first_name: firstName,
+    last_name: lastName || undefined,
+    email,
+    phone: cd.phone || undefined,
+    zip: cd.address?.postal_code || undefined,
+    state: cd.address?.state || undefined,
+    address: cd.address?.line1 || undefined,
+    city: cd.address?.city || undefined,
+    country: cd.address?.country || undefined,
+    tags,
+    custom1: amountUsd != null ? `last_donation_usd:${amountUsd}` : undefined,
+    custom2: `last_donation_at:${new Date().toISOString().slice(0, 10)}`,
+    metadata: {
+      source: isMonthly ? 'betazuck-monthly-donor' : 'betazuck-donor',
+      stripe_session_id: session.id,
+    },
+    // Carried into the form receiver fallback's body as `amount_usd`.
+    amount_usd: amountUsd,
+  };
+
+  const formReceiverFallback = {
+    url:
+      getOptionalEnv('NUCLEUS_DONOR_FORM_URL') ||
+      getOptionalEnv('NUCLEUS_FORM_URL') ||
+      undefined,
+    source: isMonthly ? 'betazuck-monthly-donor' : 'betazuck-donor',
+    originUrl: origin,
+  };
 
   try {
-    const res = await fetch(nucleusUrl, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        accept: 'application/json, text/plain, */*',
-        origin,
-        referer: origin + '/',
-        'user-agent': 'βetaZuck-landing/1.0 (+' + origin + ')',
-      },
-      body: body.toString(),
-      redirect: 'manual',
-    });
-    // Nucleus returns 302 → thank-you on success (treated as success here);
-    // log 4xx/5xx for visibility.
-    if (res.status >= 400) {
-      const text = await res.text().catch(() => '');
-      console.error('nucleus donor sync rejected:', res.status, text.slice(0, 300));
-    }
+    await syncProfileToNucleus(profile, formReceiverFallback);
   } catch (err) {
-    console.error('nucleus donor sync exception:', err);
+    console.error('nucleus donor sync failed:', err.message);
   }
 }
