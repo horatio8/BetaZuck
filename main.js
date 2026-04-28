@@ -236,17 +236,33 @@
     });
   });
 
-  donateSubmit.addEventListener('click', () => {
+  donateSubmit.addEventListener('click', async () => {
     if (donateSubmit.disabled) return;
+    const amount = isCustom ? Number(donateCustomInput.value) || 0 : selectedAmount;
+    if (!amount || amount < 1) return;
+
     donateSubmit.disabled = true;
     const original = donateSubmit.textContent;
-    donateSubmit.textContent = 'PROCESSING…';
-    setTimeout(() => {
+    donateSubmit.textContent = 'REDIRECTING…';
+    donateThanks.hidden = true;
+
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ amount, monthly: isMonthly }),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.url) {
+        throw new Error(out.error || `Checkout failed (${res.status})`);
+      }
+      window.location.href = out.url;
+    } catch (err) {
       donateSubmit.textContent = original;
       donateSubmit.disabled = false;
+      donateThanks.textContent = err.message || 'Something went wrong. Please try again.';
       donateThanks.hidden = false;
-      setTimeout(() => { donateThanks.hidden = true; }, 3500);
-    }, 700);
+    }
   });
 
   updateDonateUI();
