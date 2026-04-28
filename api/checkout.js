@@ -36,7 +36,7 @@ export default async function handler(req) {
   // Build URL-encoded params for Stripe REST (deep keys with [n][k] notation).
   const params = new URLSearchParams();
   params.set('mode', monthly ? 'subscription' : 'payment');
-  params.set('success_url', `${origin}/?donated=1`);
+  params.set('success_url', `${origin}/thanks`);
   params.set('cancel_url', `${origin}/#donate`);
   params.set('line_items[0][quantity]', '1');
   params.set('line_items[0][price_data][currency]', 'usd');
