@@ -193,12 +193,11 @@ a { color: inherit; }
   letter-spacing: -2px;
   font-weight: 900;
   margin: 0 0 20px;
-  text-transform: uppercase;
   max-width: 1100px;
   text-wrap: balance;
 }
 .hero-title span { display: inline; padding-right: 0.22em; }
-.hero-title-accent { color: var(--red); font-style: italic; }
+.hero-title-accent { color: var(--red); }
 
 .hero-sub {
   font-size: 22px;
