@@ -5,7 +5,7 @@
 //   STRIPE_SECRET_KEY  — sk_test_... in dev, sk_live_... in prod
 //   PUBLIC_SITE_URL    — used to build success_url / cancel_url
 
-import { json, badRequest, methodNotAllowed, serverError, getEnv, getOptionalEnv } from './_lib.js';
+import { json, badRequest, methodNotAllowed, serverError, getOptionalEnv } from './_lib.js';
 
 export const config = { runtime: 'edge' };
 
@@ -30,7 +30,10 @@ export default async function handler(req) {
   }
   const unitAmount = Math.round(amountUsd * 100);
 
-  const secret = getEnv('STRIPE_SECRET_KEY');
+  // Accept either env var name. STRIPE_SECRET_KEY is the convention;
+  // STRIPE_TEST_KEY is supported for quick test-mode swaps.
+  const secret = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_TEST_KEY;
+  if (!secret) return serverError('Stripe is not configured (STRIPE_SECRET_KEY)');
   const origin = (getOptionalEnv('PUBLIC_SITE_URL') || new URL(req.url).origin).replace(/\/$/, '');
 
   // Build URL-encoded params for Stripe REST (deep keys with [n][k] notation).
