@@ -30,10 +30,7 @@ export default async function handler(req) {
   }
   const unitAmount = Math.round(amountUsd * 100);
 
-  // STRIPE_TEST_KEY takes precedence so test mode is sticky during
-  // testing even if STRIPE_SECRET_KEY (live) is also set. Unset the
-  // test key to flip back to live.
-  const secret = process.env.STRIPE_TEST_KEY || process.env.STRIPE_SECRET_KEY;
+  const secret = process.env.STRIPE_SECRET_KEY;
   if (!secret) return serverError('Stripe is not configured (STRIPE_SECRET_KEY)');
   const origin = (getOptionalEnv('PUBLIC_SITE_URL') || new URL(req.url).origin).replace(/\/$/, '');
 
