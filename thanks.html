@@ -35,41 +35,42 @@
     <div class="thanks-inner">
       <span class="badge">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span class="badge-text">&check; GIFT RECEIVED</span>
+        <span class="badge-text" data-cms-text="thanks.badge">&check; GIFT RECEIVED</span>
       </span>
-      <h1 class="thanks-title">Thank<br/>you.</h1>
-      <p class="thanks-lede">
+      <h1 class="thanks-title" id="thanks-title"><span data-cms-text="thanks.title_line1">Thank</span><br/><span data-cms-text="thanks.title_line2">you.</span></h1>
+      <p class="thanks-lede" data-cms-text="thanks.lede">
         You just funded a lawyer's hour, a server's month, or a billboard hour.
         Every dollar goes to the fight — no corporate overhead, no compromises,
         no platforms that can ban you for politics.
       </p>
-      <p class="thanks-body">
+      <p class="thanks-body" data-cms-text="thanks.body">
         A receipt is on its way to your inbox. If you don't see it in a few
         minutes, check your spam folder.
       </p>
-      <div class="thanks-pillars">
+      <div class="thanks-pillars" id="thanks-pillars">
         <div class="thanks-pillar"><div class="thanks-pillar-k">Stripe only</div><div class="thanks-pillar-v">Can't ban you for politics</div></div>
         <div class="thanks-pillar"><div class="thanks-pillar-k">100% to fight</div><div class="thanks-pillar-v">No corporate overhead</div></div>
         <div class="thanks-pillar"><div class="thanks-pillar-k">Not tax-deductible</div><div class="thanks-pillar-v">Direct political action</div></div>
       </div>
-      <p class="thanks-body">
+      <p class="thanks-body" data-cms-text="thanks.share_body">
         The next move? Send three friends to <a href="/" class="thanks-link">betazuck.com</a>.
         Three signers and three donors is how a movement compounds — and how
         we make sure the next creator they try to silence has an army behind them.
       </p>
       <div class="thanks-ctas">
-        <a href="/" class="btn btn-red btn-xl">BACK TO THE FIGHT &rarr;</a>
+        <a href="/" class="btn btn-red btn-xl" data-cms-text="thanks.cta_label">BACK TO THE FIGHT &rarr;</a>
       </div>
     </div>
   </main>
 
   <footer class="footer">
-    <div>&copy; 2026 βETAZUCK · A PROJECT OF WOMAN PROPAGANDA LLC</div>
+    <div data-cms-text="footer.copyright">&copy; 2026 βETAZUCK · A PROJECT OF WOMAN PROPAGANDA LLC</div>
     <div class="footer-links">
       <a href="/">HOME</a>
       <a href="/#donate">DONATE AGAIN</a>
     </div>
   </footer>
 
+  <script src="main.js"></script>
 </body>
 </html>

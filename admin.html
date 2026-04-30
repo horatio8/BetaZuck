@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>βetaZuck CMS · Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="cms-body">
+
+  <header class="cms-topbar">
+    <div class="cms-brand">
+      <span class="brand-mark">&beta;</span>
+      <span class="brand-name">βETAZUCK&nbsp;<span class="cms-tag">CMS</span></span>
+    </div>
+    <div class="cms-topbar-right">
+      <a href="/" target="_blank" class="cms-link">View site →</a>
+      <button id="cms-logout" type="button" class="btn btn-outline-red cms-logout-btn" hidden>LOG OUT</button>
+    </div>
+  </header>
+
+  <!-- Login screen -->
+  <main id="cms-login" class="cms-login" hidden>
+    <div class="cms-login-card">
+      <h1 class="cms-login-title">βETAZUCK CMS</h1>
+      <p class="cms-login-sub">Enter the admin password to edit the site.</p>
+      <form id="cms-login-form">
+        <label class="cms-field">
+          <span class="cms-field-label">Password</span>
+          <input id="cms-login-pw" type="password" autocomplete="current-password" required />
+        </label>
+        <div id="cms-login-error" class="cms-error" hidden></div>
+        <button type="submit" class="btn btn-red btn-xl cms-login-submit">UNLOCK →</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Editor -->
+  <main id="cms-app" class="cms-app" hidden>
+    <nav class="cms-tabs" id="cms-tabs" role="tablist"></nav>
+
+    <form id="cms-form" class="cms-form" autocomplete="off">
+      <!-- Sections injected by admin.js. -->
+      <div id="cms-sections"></div>
+
+      <div class="cms-actions">
+        <div id="cms-status" class="cms-status" aria-live="polite"></div>
+        <button type="button" id="cms-discard" class="btn btn-outline-red">DISCARD CHANGES</button>
+        <button type="submit" id="cms-save" class="btn btn-red btn-xl">SAVE &amp; PUBLISH →</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

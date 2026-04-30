@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>βetaZuck — Sign the Petition</title>
+  <title data-cms-text="site.title">βetaZuck — Sign the Petition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Meta silenced 1.3 million voices with no warning. Sign the petition. Fund the fight." />
+  <meta name="description" data-cms-attr="content:site.description" content="Meta silenced 1.3 million voices with no warning. Sign the petition. Fund the fight." />
 
   <!-- Canonical + social previews -->
   <link rel="canonical" href="https://www.betazuck.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.betazuck.com/" />
   <meta property="og:site_name" content="βetaZuck" />
-  <meta property="og:title" content="Zuck is βETA · Sign the petition." />
-  <meta property="og:description" content="Meta silenced 1.3 million voices with no warning. Sign the petition. Fund the fight." />
-  <meta property="og:image" content="https://www.betazuck.com/og.png" />
+  <meta property="og:title" data-cms-attr="content:site.og_title" content="Zuck is βETA · Sign the petition." />
+  <meta property="og:description" data-cms-attr="content:site.og_description" content="Meta silenced 1.3 million voices with no warning. Sign the petition. Fund the fight." />
+  <meta property="og:image" data-cms-attr="content:site.og_image_url" content="https://www.betazuck.com/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@angrypatriotx" />
-  <meta name="twitter:creator" content="@angrypatriotx" />
-  <meta name="twitter:title" content="Zuck is βETA · Sign the petition." />
-  <meta name="twitter:description" content="Meta silenced 1.3 million voices with no warning. Sign the petition. Fund the fight." />
-  <meta name="twitter:image" content="https://www.betazuck.com/og.png" />
+  <meta name="twitter:site" data-cms-attr="content:site.twitter_handle" content="@angrypatriotx" />
+  <meta name="twitter:creator" data-cms-attr="content:site.twitter_handle" content="@angrypatriotx" />
+  <meta name="twitter:title" data-cms-attr="content:site.og_title" content="Zuck is βETA · Sign the petition." />
+  <meta name="twitter:description" data-cms-attr="content:site.og_description" content="Meta silenced 1.3 million voices with no warning. Sign the petition. Fund the fight." />
+  <meta name="twitter:image" data-cms-attr="content:site.og_image_url" content="https://www.betazuck.com/og.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
     <span class="urgency-lead">
       <span class="pulse-dot" aria-hidden="true"></span>
       <strong>LIVE:</strong>
-      Before they silence us on Facebook too —
+      <span data-cms-text="urgency.lead">Before they silence us on Facebook too —</span>
     </span>
     <span id="countdown" class="countdown">00d : 00h : 00m : 00s</span>
   </div>
@@ -54,8 +54,8 @@
       <span class="brand-name">βETAZUCK</span>
     </a>
     <div class="nav-ctas">
-      <a href="#donate" class="btn btn-outline-gold">DONATE</a>
-      <a href="#petition" class="btn btn-red">SIGN &rarr;</a>
+      <a href="#donate" class="btn btn-outline-gold" data-cms-text="nav.donate_label">DONATE</a>
+      <a href="#petition" class="btn btn-red" data-cms-text="nav.sign_label">SIGN &rarr;</a>
     </div>
   </nav>
 
@@ -64,25 +64,25 @@
     <section class="hero">
       <span class="badge">
         <span class="pulse-dot" aria-hidden="true"></span>
-        <span class="badge-text">LIVE CAMPAIGN · APRIL 2026</span>
+        <span class="badge-text" data-cms-text="hero.badge_text">LIVE CAMPAIGN · APRIL 2026</span>
       </span>
-      <h1 class="hero-title">
+      <h1 class="hero-title" id="hero-title">
         <span>Zuck</span>
         <span>is</span>
         <span class="hero-title-accent">βETA</span>
       </h1>
-      <p class="hero-sub">
+      <p class="hero-sub" data-cms-html="hero.subtitle_html">
         1.3 million voices erased. Meta banned <strong>@WomanPropaganda</strong> with no warning,
         no appeal, no explanation. This isn't about one account. This is about
         <strong>your right to speak.</strong>
       </p>
 
       <div class="hero-ctas">
-        <a href="#petition" class="btn btn-red btn-xl btn-glow">SIGN THE PETITION &rarr;</a>
-        <a href="#donate" class="btn btn-outline-gold btn-xl">DONATE TO THE FIGHT</a>
+        <a href="#petition" class="btn btn-red btn-xl btn-glow" data-cms-text="hero.cta_primary_label">SIGN THE PETITION &rarr;</a>
+        <a href="#donate" class="btn btn-outline-gold btn-xl" data-cms-text="hero.cta_secondary_label">DONATE TO THE FIGHT</a>
       </div>
 
-      <div class="stats">
+      <div class="stats" id="hero-stats">
         <div class="stat"><div class="stat-n">1.3M</div><div class="stat-l">Followers erased</div></div>
         <div class="stat"><div class="stat-n">14,000+</div><div class="stat-l">Malicious reports</div></div>
         <div class="stat"><div class="stat-n">0</div><div class="stat-l">Warnings or appeals</div></div>
@@ -90,18 +90,18 @@
 
       <div id="hero-counter" class="hero-counter" hidden>
         <span id="hero-counter-num" class="hero-counter-num">0</span>
-        <span class="hero-counter-label">AMERICANS ON THE RECORD · GOAL 10,000</span>
+        <span class="hero-counter-label" data-cms-text="hero.counter_label">AMERICANS ON THE RECORD · GOAL 10,000</span>
       </div>
 
       <div class="hero-photo">
-        <img src="hero.jpg" alt="" class="hero-photo-img" />
+        <img src="hero.jpg" alt="" class="hero-photo-img" data-cms-attr="src:hero.image_url" />
       </div>
     </section>
 
     <section class="story">
-      <div class="eyebrow">01 / THE STORY</div>
-      <h2 class="section-title">One account. 1.3 million people. Gone in an afternoon.</h2>
-      <div class="story-grid">
+      <div class="eyebrow" data-cms-text="story.eyebrow">01 / THE STORY</div>
+      <h2 class="section-title" data-cms-text="story.title">One account. 1.3 million people. Gone in an afternoon.</h2>
+      <div class="story-grid" id="story-grid">
         <article class="story-item">
           <div class="story-lead">01 · What happened</div>
           <p>Meta banned @WomanPropaganda with no warning, no appeal, and no explanation. 1.3 million followers — built over years — erased in a single afternoon. 14,000+ coordinated malicious reports. Zero due process.</p>
@@ -120,15 +120,15 @@
     <section id="petition" class="petition">
       <div class="petition-inner">
         <div class="petition-copy">
-          <div class="eyebrow eyebrow-on-red">02 / ADD YOUR NAME</div>
-          <h2 class="section-title section-title-lg">Sign the<br/>petition.</h2>
-          <p class="petition-lede">
+          <div class="eyebrow eyebrow-on-red" data-cms-text="petition.eyebrow">02 / ADD YOUR NAME</div>
+          <h2 class="section-title section-title-lg" id="petition-title"><span data-cms-text="petition.title_line1">Sign the</span><br/><span data-cms-text="petition.title_line2">petition.</span></h2>
+          <p class="petition-lede" data-cms-text="petition.lede">
             A roll call of every American who refuses to be silenced by Big Tech. When this number
             becomes political reality — senators will notice.
           </p>
           <div id="petition-counter" class="petition-counter" hidden>
             <span id="petition-counter-num" class="petition-counter-num">0</span>
-            <span class="petition-counter-label">signed · target 10,000</span>
+            <span class="petition-counter-label" data-cms-text="petition.counter_label">signed · target 10,000</span>
           </div>
         </div>
         <div class="petition-form-wrap">
@@ -200,12 +200,12 @@
               </div>
             </label>
             <div id="petition-error" class="form-error" hidden></div>
-            <button type="submit" class="btn btn-submit">SIGN THE PETITION &rarr;</button>
+            <button type="submit" class="btn btn-submit" data-cms-text="petition.submit_label">SIGN THE PETITION &rarr;</button>
           </form>
           <div id="petition-success" class="petition-success" hidden>
-            <div class="eyebrow eyebrow-on-red">&check; SIGNED</div>
-            <div class="success-title">Thank you, <span id="success-first-name">friend</span>.</div>
-            <p class="success-body">
+            <div class="eyebrow eyebrow-on-red" data-cms-text="petition.success_eyebrow">&check; SIGNED</div>
+            <div class="success-title"><span data-cms-text="petition.success_title_prefix">Thank you, </span><span id="success-first-name">friend</span>.</div>
+            <p class="success-body" data-cms-text="petition.success_body">
               Thank you for standing up. No one, especially not Zuck, should have the power
               to silence free speech.
             </p>
@@ -217,14 +217,14 @@
     <section id="donate" class="donate">
       <div class="donate-inner">
         <div class="donate-copy">
-          <div class="eyebrow eyebrow-gold">03 / FUND THE FIGHT</div>
-          <h2 class="section-title section-title-md"><span class="gold">Fund</span> the war chest.</h2>
-          <p class="donate-lede">
+          <div class="eyebrow eyebrow-gold" data-cms-text="donate.eyebrow">03 / FUND THE FIGHT</div>
+          <h2 class="section-title section-title-md" id="donate-title"><span class="gold" data-cms-text="donate.title_accent">Fund</span><span data-cms-text="donate.title_suffix"> the war chest.</span></h2>
+          <p class="donate-lede" data-cms-html="donate.lede_html">
             Lawyers. Servers. A platform they can't unplug. Every dollar goes toward holding Big Tech
             accountable and rebuilding what they destroyed. We are <strong>not</strong> backed
             by corporations. We are backed by you.
           </p>
-          <div class="pillars">
+          <div class="pillars" id="donate-pillars">
             <div class="pillar"><div class="pillar-k">No GoFundMe</div><div class="pillar-v">Hostile to our causes</div></div>
             <div class="pillar"><div class="pillar-k">No PayPal</div><div class="pillar-v">Deplatforms freely</div></div>
             <div class="pillar"><div class="pillar-k">Stripe only</div><div class="pillar-v">Can't ban you for politics</div></div>
@@ -233,8 +233,8 @@
         </div>
         <div class="donate-panel">
           <div class="donate-toggle" role="tablist" aria-label="Donation frequency">
-            <button type="button" class="donate-toggle-btn is-active" data-monthly="false" role="tab">ONE-TIME</button>
-            <button type="button" class="donate-toggle-btn" data-monthly="true" role="tab">MONTHLY</button>
+            <button type="button" class="donate-toggle-btn is-active" data-monthly="false" role="tab" data-cms-text="donate.toggle_onetime_label">ONE-TIME</button>
+            <button type="button" class="donate-toggle-btn" data-monthly="true" role="tab" data-cms-text="donate.toggle_monthly_label">MONTHLY</button>
           </div>
           <div id="donate-amounts" class="donate-amounts">
             <button type="button" class="donate-amt" data-amt="35"><span class="amt">$35</span></button>
@@ -245,20 +245,20 @@
             <button type="button" class="donate-amt is-premium" data-amt="1500"><span class="premium-tag">HERO</span><span class="amt">$1500</span></button>
           </div>
           <button type="button" id="donate-custom-row" class="donate-custom">
-            <span class="donate-custom-label">OTHER AMOUNT $</span>
+            <span class="donate-custom-label" data-cms-text="donate.custom_label">OTHER AMOUNT $</span>
             <input id="donate-custom-input" type="number" inputmode="numeric" placeholder="0" min="1" />
           </button>
           <button type="button" id="donate-submit" class="btn btn-submit btn-gold">DONATE $65 &rarr;</button>
-          <div class="donate-meta">Secure checkout via Stripe · 100% goes to the fight · Not tax-deductible</div>
+          <div class="donate-meta" data-cms-text="donate.meta">Secure checkout via Stripe · 100% goes to the fight · Not tax-deductible</div>
           <div id="donate-thanks" class="donate-thanks" hidden></div>
         </div>
       </div>
     </section>
 
     <section class="stay">
-      <div class="eyebrow">04 / STAY CONNECTED</div>
-      <h3 class="section-title section-title-sm">Don't let them cut us off again.</h3>
-      <div class="social-grid">
+      <div class="eyebrow" data-cms-text="social.eyebrow">04 / STAY CONNECTED</div>
+      <h3 class="section-title section-title-sm" data-cms-text="social.title">Don't let them cut us off again.</h3>
+      <div class="social-grid" id="social-grid">
         <a href="https://www.facebook.com/share/189kXfSQ7j/" class="social" target="_blank" rel="noopener noreferrer">
           <div class="social-sym">f</div>
           <div class="social-name">FACEBOOK</div>
@@ -288,8 +288,8 @@
   </main>
 
   <footer class="footer">
-    <div>&copy; 2026 βETAZUCK · A PROJECT OF WOMAN PROPAGANDA LLC</div>
-    <div class="footer-links">
+    <div data-cms-text="footer.copyright">&copy; 2026 βETAZUCK · A PROJECT OF WOMAN PROPAGANDA LLC</div>
+    <div class="footer-links" id="footer-links">
       <a href="#">PRIVACY</a>
       <a href="#">CONTACT</a>
       <a href="#">PRESS</a>
@@ -301,8 +301,8 @@
       <div class="sticky-cta-eyebrow">βETAZUCK</div>
       <div id="sticky-cta-status" class="sticky-cta-status">Join the fight</div>
     </div>
-    <a href="#donate" class="btn btn-outline-red">DONATE</a>
-    <a href="#petition" class="btn btn-red">SIGN &rarr;</a>
+    <a href="#donate" class="btn btn-outline-red" data-cms-text="nav.donate_label">DONATE</a>
+    <a href="#petition" class="btn btn-red" data-cms-text="nav.sign_label">SIGN &rarr;</a>
   </div>
 
   <script src="main.js"></script>
