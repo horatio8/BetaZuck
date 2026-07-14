@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hayden McDougall for U.S. Senate — Join the Movement</title>
+  <meta name="description" content="Hayden McDougall is running for U.S. Senate in South Carolina. Join the movement." />
+
+  <link rel="canonical" href="https://www.betazuck.com/senate" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.betazuck.com/senate" />
+  <meta property="og:title" content="Hayden McDougall for U.S. Senate" />
+  <meta property="og:description" content="Join the movement. South Carolina deserves better." />
+  <meta property="og:image" content="https://www.betazuck.com/senate-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hayden McDougall for U.S. Senate" />
+  <meta name="twitter:description" content="Join the movement. South Carolina deserves better." />
+  <meta name="twitter:image" content="https://www.betazuck.com/senate-og.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0A1020;
+      color: #F3F1EC;
+      font-family: 'Barlow', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: #FF5A36; text-decoration: none; transition: color .15s ease; }
+    a:hover { color: #FF7A5A; }
+    input, button, select, textarea { font-family: 'Barlow', sans-serif; }
+    input::placeholder { color: rgba(243,241,236,0.35); }
+    input:focus { border-color: #FF5A36 !important; box-shadow: 0 0 0 3px rgba(255,90,54,0.2); }
+    button { cursor: pointer; font-family: inherit; }
+    .btn-cta {
+      background: #FF5A36; color: #0A1020;
+      font-family: 'Barlow Condensed', 'Barlow', sans-serif;
+      font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+      border: none; border-radius: 6px; cursor: pointer;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn-cta:hover { background: #FF7A5A; transform: translateY(-1px); }
+    .btn-cta:active { transform: scale(0.98); }
+    .btn-ghost {
+      background: rgba(243,241,236,0.08);
+      border: 1px solid rgba(243,241,236,0.2);
+      color: #F3F1EC;
+      font-weight: 700; font-size: 15px;
+      padding: 12px 24px; border-radius: 6px;
+      transition: background .15s ease;
+    }
+    .btn-ghost:hover { background: rgba(243,241,236,0.15); color: #F3F1EC; }
+
+    .nav-link { color: rgba(243,241,236,0.75); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .nav-link:hover { color: #F3F1EC; }
+    .nav-cta {
+      display: inline-block;
+      background: #FF5A36; color: #0A1020;
+      font-family: 'Barlow Condensed'; font-weight: 700; font-size: 16px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 10px 22px; border-radius: 4px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .nav-cta:hover { background: #FF7A5A; color: #0A1020; transform: translateY(-1px); }
+    .nav-cta:active { transform: scale(0.97); }
+
+    .input-field {
+      background: rgba(10,16,32,0.6);
+      border: 1px solid rgba(243,241,236,0.18);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 16px;
+      color: #F3F1EC;
+      outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease;
+      width: 100%;
+    }
+
+    .field-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(243,241,236,0.75);
+    }
+    .field-error { font-size: 13px; color: #FF8A6E; }
+
+    .photo-placeholder {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255,90,54,0.15) 0%, rgba(10,16,32,0.4) 60%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 12px, transparent 12px 24px),
+        #12203E;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(243,241,236,0.4);
+      font-family: 'Barlow Condensed'; font-size: 13px; letter-spacing: 0.14em;
+      text-transform: uppercase; text-align: center; padding: 20px;
+    }
+
+    @keyframes kenburns { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+    @keyframes heroIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+    @keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    [data-reveal] { opacity: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      [data-reveal] { opacity: 1 !important; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding-bottom: 80px; }
+      nav.nav-desktop a.nav-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky header -->
+  <header id="site-header" style="position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 24px; background:transparent; transition:background .3s ease, padding .3s ease, box-shadow .3s ease">
+    <a href="#top" style="font-family:'Barlow Condensed'; font-weight:800; font-size:20px; letter-spacing:0.06em; text-transform:uppercase; color:#F3F1EC">McDougall <span style="color:#FF5A36">/</span> Senate</a>
+    <nav class="nav-desktop" style="display:flex; align-items:center; gap:24px">
+      <a href="#why" class="nav-link">Why</a>
+      <a href="#watch" class="nav-link">Watch</a>
+      <a href="#join" class="nav-cta">Sign up</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" data-screen-label="Hero" style="position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden">
+    <div style="position:absolute; inset:0; animation:kenburns 24s ease-in-out infinite alternate">
+      <div class="photo-placeholder">Hero photo or video still — candidate or crowd, dramatic light</div>
+    </div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,16,32,0.55) 0%, rgba(10,16,32,0.35) 40%, rgba(10,16,32,0.92) 100%); pointer-events:none"></div>
+    <div style="position:relative; z-index:2; max-width:880px; padding:120px 24px 96px; pointer-events:none">
+      <div style="pointer-events:auto; animation:heroIn .8s cubic-bezier(0.2,0.7,0.3,1) both">
+        <div style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(243,241,236,0.25); border-radius:999px; padding:6px 16px; font-size:13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(243,241,236,0.85)">
+          <span style="width:7px; height:7px; border-radius:50%; background:#FF5A36; animation:pulseDot 2s ease-in-out infinite"></span>
+          Hayden McDougall &middot; U.S. Senate &middot; South Carolina
+        </div>
+        <h1 style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(52px, 9vw, 112px); line-height:0.95; letter-spacing:-0.01em; text-transform:uppercase; margin:28px 0 20px">South Carolina, it's our turn.</h1>
+        <p style="font-size:clamp(17px, 2.2vw, 22px); line-height:1.5; color:rgba(243,241,236,0.85); max-width:560px; margin:0 auto 36px">Politics stopped working for regular people a long time ago. We're done waiting for it to fix itself.</p>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:20px">
+          <a href="#join" class="btn-cta" style="display:inline-block; font-size:22px; padding:16px 40px; box-shadow:0 8px 32px rgba(255,90,54,0.35); color:#0A1020">Join us</a>
+          <div style="font-size:15px; color:rgba(243,241,236,0.8)"><strong id="hero-count" style="font-family:'Barlow Condensed'; font-weight:700; font-size:22px; color:#F3F1EC">0</strong> supporters and counting</div>
+        </div>
+
+        <!-- Hero mini-form -->
+        <form id="hero-form" novalidate style="margin:36px auto 0; max-width:680px; background:rgba(10,16,32,0.72); backdrop-filter:blur(10px); border:1px solid rgba(243,241,236,0.15); border-radius:10px; padding:20px; display:flex; flex-direction:column; gap:12px; text-align:left">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px">
+            <input class="input-field" aria-label="First name" name="first" autocomplete="given-name" placeholder="First name *" style="padding:13px 14px; font-size:15px" />
+            <input class="input-field" aria-label="Email" name="email" type="email" autocomplete="email" placeholder="Email *" style="padding:13px 14px; font-size:15px" />
+            <input class="input-field" aria-label="Mobile" name="mobile" type="tel" autocomplete="tel" placeholder="Mobile *" style="padding:13px 14px; font-size:15px" />
+            <button type="submit" class="btn-cta" style="font-size:19px; padding:13px 18px">Count me in</button>
+          </div>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0" />
+          <div id="hero-error" class="field-error" hidden></div>
+          <div style="font-size:11px; line-height:1.5; color:rgba(243,241,236,0.45)">Last name and ZIP finish at <a href="#join" style="color:rgba(243,241,236,0.6); text-decoration:underline">the full form</a>. By signing up you agree to receive email and texts. Reply STOP to opt out.</div>
+        </form>
+        <div id="hero-success" style="display:none; margin:36px auto 0; max-width:520px; background:rgba(10,16,32,0.72); backdrop-filter:blur(10px); border:1px solid rgba(255,90,54,0.4); border-radius:10px; padding:18px 24px; font-size:16px; font-weight:600">
+          &#10003; You're in, <span data-first-name>friend</span> — supporter #<span data-count-display>0</span>. <a href="#share">Now bring three friends.</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section id="why" data-screen-label="Core message" style="padding:110px 24px; max-width:1080px; margin:0 auto">
+    <div data-reveal>
+      <div style="font-size:14px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#FF5A36; margin-bottom:16px">Why we're running</div>
+      <h2 style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(36px, 5vw, 64px); line-height:1; text-transform:uppercase; margin:0 0 18px; max-width:760px">This is what we're fighting for</h2>
+      <p style="font-size:18px; line-height:1.6; color:rgba(243,241,236,0.75); max-width:640px; margin:0">[ Core message placeholder — two or three sentences on what this campaign is about and why now. To be supplied. ]</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px; margin-top:56px">
+      <div data-reveal style="background:rgba(243,241,236,0.04); border:1px solid rgba(243,241,236,0.1); border-radius:8px; padding:28px">
+        <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:44px; color:#FF5A36; line-height:1">01</div>
+        <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:22px; text-transform:uppercase; letter-spacing:0.03em; margin:12px 0 8px">[ Point one ]</div>
+        <p style="font-size:15px; line-height:1.55; color:rgba(243,241,236,0.7); margin:0">[ Supporting point placeholder — one short stat or promise. To be supplied. ]</p>
+      </div>
+      <div data-reveal style="background:rgba(243,241,236,0.04); border:1px solid rgba(243,241,236,0.1); border-radius:8px; padding:28px">
+        <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:44px; color:#FF5A36; line-height:1">02</div>
+        <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:22px; text-transform:uppercase; letter-spacing:0.03em; margin:12px 0 8px">[ Point two ]</div>
+        <p style="font-size:15px; line-height:1.55; color:rgba(243,241,236,0.7); margin:0">[ Supporting point placeholder — one short stat or promise. To be supplied. ]</p>
+      </div>
+      <div data-reveal style="background:rgba(243,241,236,0.04); border:1px solid rgba(243,241,236,0.1); border-radius:8px; padding:28px">
+        <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:44px; color:#FF5A36; line-height:1">03</div>
+        <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:22px; text-transform:uppercase; letter-spacing:0.03em; margin:12px 0 8px">[ Point three ]</div>
+        <p style="font-size:15px; line-height:1.55; color:rgba(243,241,236,0.7); margin:0">[ Supporting point placeholder — one short stat or promise. To be supplied. ]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Watch -->
+  <section id="watch" data-screen-label="Video" style="padding:0 24px 110px; max-width:1080px; margin:0 auto">
+    <div data-reveal style="position:relative; border-radius:12px; overflow:hidden; aspect-ratio:16/9">
+      <div class="photo-placeholder">Launch video poster frame — video embed to be supplied</div>
+      <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; background:rgba(10,16,32,0.35); pointer-events:none">
+        <div style="width:84px; height:84px; border-radius:50%; background:#FF5A36; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 32px rgba(255,90,54,0.4)">
+          <div style="width:0; height:0; border-top:14px solid transparent; border-bottom:14px solid transparent; border-left:24px solid #0A1020; margin-left:6px"></div>
+        </div>
+        <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:20px; letter-spacing:0.1em; text-transform:uppercase">Watch the launch</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signup (full form) -->
+  <section id="join" data-screen-label="Signup form" style="background:#101A30; border-top:1px solid rgba(243,241,236,0.08); border-bottom:1px solid rgba(243,241,236,0.08); padding:110px 24px">
+    <div style="max-width:560px; margin:0 auto">
+      <div id="full-form-wrap" data-reveal>
+        <div style="text-align:center; margin-bottom:40px">
+          <h2 style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(36px, 5vw, 56px); line-height:1; text-transform:uppercase; margin:0 0 12px">Join the movement</h2>
+          <p style="font-size:17px; color:rgba(243,241,236,0.7); margin:0">It takes 30 seconds. It matters for six years.</p>
+        </div>
+        <form id="full-form" novalidate style="display:flex; flex-direction:column; gap:18px">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px">
+            <div style="display:flex; flex-direction:column; gap:6px">
+              <label for="f-first" class="field-label">First name <span style="color:#FF5A36">*</span></label>
+              <input id="f-first" class="input-field" name="first" autocomplete="given-name" />
+              <div class="field-error" data-error-for="first" hidden></div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px">
+              <label for="f-last" class="field-label">Last name <span style="color:#FF5A36">*</span></label>
+              <input id="f-last" class="input-field" name="last" autocomplete="family-name" />
+              <div class="field-error" data-error-for="last" hidden></div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px">
+            <label for="f-email" class="field-label">Email <span style="color:#FF5A36">*</span></label>
+            <input id="f-email" class="input-field" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+            <div class="field-error" data-error-for="email" hidden></div>
+          </div>
+          <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:18px">
+            <div style="display:flex; flex-direction:column; gap:6px">
+              <label for="f-mobile" class="field-label">Mobile <span style="color:#FF5A36">*</span></label>
+              <input id="f-mobile" class="input-field" name="mobile" type="tel" autocomplete="tel" placeholder="(803) 555-0147" />
+              <div class="field-error" data-error-for="mobile" hidden></div>
+              <div style="font-size:12px; color:rgba(243,241,236,0.45)">U.S. format shown — international numbers welcome (+44…)</div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px">
+              <label for="f-zip" class="field-label">ZIP <span style="font-weight:500; text-transform:none; letter-spacing:0; color:rgba(243,241,236,0.45)">(optional)</span></label>
+              <input id="f-zip" class="input-field" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="29401" />
+            </div>
+          </div>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0" />
+          <button type="submit" class="btn-cta" style="font-size:24px; padding:18px; margin-top:6px">Count me in</button>
+          <p style="font-size:12px; line-height:1.5; color:rgba(243,241,236,0.45); text-align:center; margin:0">
+            By signing up you agree to receive email and text messages from McDougall for Senate. Message and data rates may apply. Reply STOP to opt out.
+            <a href="#privacy" style="color:rgba(243,241,236,0.6); text-decoration:underline">Privacy policy</a>
+          </p>
+        </form>
+      </div>
+
+      <div id="full-form-success" style="display:none; text-align:center">
+        <div style="width:72px; height:72px; border-radius:50%; background:#FF5A36; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:34px; color:#0A1020; font-weight:700">&#10003;</div>
+        <h2 style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(36px, 5vw, 56px); line-height:1; text-transform:uppercase; margin:0 0 12px">You're in, <span data-first-name>friend</span>.</h2>
+        <p style="font-size:18px; color:rgba(243,241,236,0.75); margin:0 0 32px">Supporter #<strong data-count-display style="color:#F3F1EC">0</strong>. Now bring three friends.</p>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px">
+          <a class="share-x btn-ghost" target="_blank" rel="noopener noreferrer">Share on X</a>
+          <a class="share-fb btn-ghost" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a class="share-wa btn-ghost" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <button type="button" class="share-copy btn-ghost">Copy link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Momentum -->
+  <section id="momentum" data-screen-label="Momentum" style="padding:110px 24px; max-width:1080px; margin:0 auto; text-align:center">
+    <div data-reveal>
+      <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(72px, 12vw, 140px); line-height:1; color:#FF5A36"><span id="big-count">0</span></div>
+      <div style="font-family:'Barlow Condensed'; font-weight:700; font-size:24px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(243,241,236,0.8); margin-top:8px">South Carolinians and counting</div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px; margin-top:64px; text-align:left">
+      <div data-reveal style="border-left:2px solid #FF5A36; padding:4px 0 4px 20px">
+        <p style="font-size:17px; line-height:1.55; font-style:italic; color:rgba(243,241,236,0.85); margin:0 0 10px">"[ Supporter quote placeholder — one sentence, real voice. ]"</p>
+        <div style="font-size:14px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:rgba(243,241,236,0.5)">Charleston, SC</div>
+      </div>
+      <div data-reveal style="border-left:2px solid #FF5A36; padding:4px 0 4px 20px">
+        <p style="font-size:17px; line-height:1.55; font-style:italic; color:rgba(243,241,236,0.85); margin:0 0 10px">"[ Supporter quote placeholder — one sentence, real voice. ]"</p>
+        <div style="font-size:14px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:rgba(243,241,236,0.5)">Greenville, SC</div>
+      </div>
+      <div data-reveal style="border-left:2px solid #FF5A36; padding:4px 0 4px 20px">
+        <p style="font-size:17px; line-height:1.55; font-style:italic; color:rgba(243,241,236,0.85); margin:0 0 10px">"[ Supporter quote placeholder — one sentence, real voice. ]"</p>
+        <div style="font-size:14px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:rgba(243,241,236,0.5)">Columbia, SC</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Share -->
+  <section id="share" data-screen-label="Share" style="padding:0 24px 110px; text-align:center">
+    <div data-reveal style="max-width:640px; margin:0 auto">
+      <h2 style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(32px, 4.5vw, 48px); line-height:1; text-transform:uppercase; margin:0 0 24px">Signups recruit signups</h2>
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px">
+        <a class="share-x btn-ghost" target="_blank" rel="noopener noreferrer">Share on X</a>
+        <a class="share-fb btn-ghost" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a class="share-wa btn-ghost" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <button type="button" class="share-copy btn-ghost">Copy link</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation (hidden behind feature flag; JS uncovers if enabled) -->
+  <section id="donate" data-screen-label="Donate" hidden style="background:#101A30; border-top:1px solid rgba(243,241,236,0.08); padding:110px 24px">
+    <div style="max-width:560px; margin:0 auto; text-align:center">
+      <h2 style="font-family:'Barlow Condensed'; font-weight:800; font-size:clamp(36px, 5vw, 56px); line-height:1; text-transform:uppercase; margin:0 0 12px">Fuel the fight</h2>
+      <div style="display:inline-flex; background:rgba(10,16,32,0.6); border:1px solid rgba(243,241,236,0.18); border-radius:999px; padding:4px; margin:20px 0 28px">
+        <button type="button" id="donate-onetime" class="donate-freq is-active" data-freq="onetime" style="border:none; border-radius:999px; padding:10px 24px; font-weight:700; font-size:14px; background:#FF5A36; color:#0A1020">One-time</button>
+        <button type="button" id="donate-monthly" class="donate-freq" data-freq="monthly" style="border:none; border-radius:999px; padding:10px 24px; font-weight:700; font-size:14px; background:transparent; color:rgba(243,241,236,0.7)">Monthly</button>
+      </div>
+      <div id="donate-tiers" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:12px">
+        <button type="button" class="donate-tier" data-amt="10" style="border:1px solid rgba(243,241,236,0.18); background:rgba(10,16,32,0.6); color:#F3F1EC; border-radius:8px; padding:18px 8px; font-family:'Barlow Condensed'; font-weight:800; font-size:26px">$10</button>
+        <button type="button" class="donate-tier is-active" data-amt="25" style="border:1px solid #FF5A36; background:rgba(255,90,54,0.15); color:#F3F1EC; border-radius:8px; padding:18px 8px; font-family:'Barlow Condensed'; font-weight:800; font-size:26px">$25</button>
+        <button type="button" class="donate-tier" data-amt="50" style="border:1px solid rgba(243,241,236,0.18); background:rgba(10,16,32,0.6); color:#F3F1EC; border-radius:8px; padding:18px 8px; font-family:'Barlow Condensed'; font-weight:800; font-size:26px">$50</button>
+        <button type="button" class="donate-tier" data-amt="100" style="border:1px solid rgba(243,241,236,0.18); background:rgba(10,16,32,0.6); color:#F3F1EC; border-radius:8px; padding:18px 8px; font-family:'Barlow Condensed'; font-weight:800; font-size:26px">$100</button>
+      </div>
+      <input id="donate-custom" class="input-field" inputmode="decimal" placeholder="Custom amount" style="margin-top:12px; padding:16px; text-align:center" />
+      <button type="button" id="donate-submit" class="btn-cta" style="width:100%; margin-top:20px; font-size:24px; padding:18px">Donate $25</button>
+      <p style="font-size:12px; line-height:1.5; color:rgba(243,241,236,0.45); margin:20px 0 0">
+        [ Payment processor integration point — Stripe / Anedot / WinRed. No live keys. ]<br />
+        [ Contribution disclaimers and eligibility attestations to be supplied before launch. ]
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer data-screen-label="Footer" style="border-top:1px solid rgba(243,241,236,0.08); padding:48px 24px 120px; text-align:center">
+    <div style="font-family:'Barlow Condensed'; font-weight:800; font-size:18px; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px">McDougall <span style="color:#FF5A36">/</span> Senate</div>
+    <p style="font-size:13px; color:rgba(243,241,236,0.45); max-width:520px; margin:0 auto 16px; line-height:1.6">[ Paid for by — authorization / disclaimer line placeholder ]</p>
+    <div style="display:flex; justify-content:center; gap:20px; font-size:14px">
+      <a href="mailto:hello@mcdougallforsenate.example" style="color:rgba(243,241,236,0.6)">Contact</a>
+      <a href="#privacy" style="color:rgba(243,241,236,0.6)">Privacy</a>
+      <a href="#" style="color:rgba(243,241,236,0.6)">X</a>
+      <a href="#" style="color:rgba(243,241,236,0.6)">Facebook</a>
+    </div>
+  </footer>
+
+  <!-- Mobile sticky signup bar -->
+  <div id="sticky-bar" hidden style="position:fixed; bottom:0; left:0; right:0; z-index:60; background:rgba(10,16,32,0.92); backdrop-filter:blur(12px); border-top:1px solid rgba(243,241,236,0.12); padding:12px 16px calc(12px + env(safe-area-inset-bottom))">
+    <a href="#join" class="btn-cta" style="display:block; text-align:center; font-size:20px; padding:14px">Join us</a>
+  </div>
+
+  <script src="senate.js"></script>
+</body>
+</html>
